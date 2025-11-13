@@ -1,0 +1,25 @@
+Project 3: E-Learning Course RAG
+Detailed Objective: Build a RAG for e-learning (Python tutorials).
+Hybrid RAG for snippets, memory for learning prefs (e.g., "beginner level" dict), tools for mock code execution. Streamlit UI for interactive lessons.
+How: Ingest tutorials (TextLoader for .txt), hybrid (FAISS + BM25 for "loops"), memory (extract "beginner" to dict in add_messages), 
+tool (function for code run mock, bind), LCEL chain, UI for lesson chat.
+ Extras: Streaming responses (token-by-token for tutorials), Redis for caching lesson snippets (redis.Redis().get for quick load).
+Task Split:
+A: Ingest (TextLoader, splitter, FAISS).
+B: Hybrid RAG (EnsembleRetriever for snippets).
+C: Memory (level dict) + tools (code exec mock).
+D: Streamlit UI (lesson chat) + extras (streaming, Redis).
+Marks Criteria (Total 100):
+Functionality (snippet query): 40
+Integration (memory/tool): 20
+Extras (streaming/Redis): 20
+Code/UI: 10
+Demo/Repo: 10
+Implementation Guide:
+Step 1: Research/Generate (1h): LLM prompt: "LangChain TextLoader + splitter + FAISS for Python tutorials." Test notebook: Load loops.txt, chunk, index.
+Step 2: Hybrid (30min): Prompt: "LCEL chain with EnsembleRetriever (FAISS + BM25 for code terms)."
+Step 3: Memory/Tool (30min): Prompt: "Custom memory extracting 'beginner' to entities dict, bound tool for code exec (mock print output)."
+Step 4: Backend (30min): Prompt: "FastAPI /query with hybrid chain." Test curl.
+Step 5: UI/Extras (1h): Prompt: "Streamlit lesson chat with st.chat_input calling /query." For streaming: "chain.astream for token-by-token in UI." For Redis: "Cache snippets with redis.get/set (key=lesson, value=chunk)."
+Test/Debug: Curl /query ("Beginner loops?") — Hybrid. Streaming: See tokens in UI.
+Pitfalls: BM25 on code—test with "for loop." Redis TTL—use setex for expiry.

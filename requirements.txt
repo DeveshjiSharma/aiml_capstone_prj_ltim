@@ -1,0 +1,4 @@
+langchain
+langchain-text-splitters 
+langchain-community 
+bs4
